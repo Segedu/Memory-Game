@@ -9,12 +9,12 @@ class MemoryGame extends Component {
         clicksCounter: 1,
         movesCounter: 0,
         cards: [
-            { cardBack: "card back", content: "card 1", isClicked: false, id: uuidv4() },
-            { cardBack: "card back", content: "card 1", isClicked: false, id: uuidv4() },
-            { cardBack: "card back", content: "card 2", isClicked: false, id: uuidv4() },
-            { cardBack: "card back", content: "card 2", isClicked: false, id: uuidv4() },
-            { cardBack: "card back", content: "card 3", isClicked: false, id: uuidv4() },
-            { cardBack: "card back", content: "card 3", isClicked: false, id: uuidv4() }]
+            { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
+            { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
+            { cardBack: "click", content: "card 2", isClicked: false, id: uuidv4() },
+            { cardBack: "click", content: "card 2", isClicked: false, id: uuidv4() },
+            { cardBack: "click", content: "card 3", isClicked: false, id: uuidv4() },
+            { cardBack: "click", content: "card 3", isClicked: false, id: uuidv4() }]
     }
 
     componentDidMount() {
@@ -52,6 +52,7 @@ class MemoryGame extends Component {
             if (this.state.clickedBtn.content === card.content) {
                 console.log("match");
                 this.setState({ clickedBtn: null })
+                // this.isGameOver()
             }
             else {
                 console.log("try again");
@@ -67,9 +68,13 @@ class MemoryGame extends Component {
         }
     }
 
-    isGameOver = () => {
-
-    }
+    // isGameOver = () => {
+    //     let lastCard = this.state.cards.find((cardUnClicked) => cardUnClicked.isClicked == false)
+    //     console.log(lastCard);
+    //     if (lastCard) {
+    //         alert("game over- you won")
+    //     }
+    // }
 
     render() {
         return (<div className="MemoryGame">
