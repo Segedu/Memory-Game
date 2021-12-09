@@ -1,0 +1,12 @@
+.MemoryGame{
+
+    display: grid;
+    grid-template-columns: repeat(2, 20%);
+    justify-content: center;
+    gap: 10px;
+}
+p{
+    background-color: orange;
+    border-radius: 10px;
+    height: 50px;
+}
