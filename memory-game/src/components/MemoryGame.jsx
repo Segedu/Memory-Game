@@ -4,9 +4,10 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
+        clickedBtn: null,
         timer: 0,
+        clicksCounter: 1,
         movesCounter: 0,
-        // winningBoard: [timeRecord: this.state.timer],
         cards: [
             { cardBack: "card back", content: "card 1", isClicked: false, id: uuidv4() },
             { cardBack: "card back", content: "card 1", isClicked: false, id: uuidv4() },
@@ -15,6 +16,7 @@ class MemoryGame extends Component {
             { cardBack: "card back", content: "card 3", isClicked: false, id: uuidv4() },
             { cardBack: "card back", content: "card 3", isClicked: false, id: uuidv4() }]
     }
+
     componentDidMount() {
         this.startGame()
     }
@@ -27,16 +29,54 @@ class MemoryGame extends Component {
         const card = this.state.cards.find((cardToFind) => cardToFind.id === cardId)
         card.isClicked = true;
         this.setState({ ...this.state });
-        this.isCardsEqual()
+
+        if (this.state.clickedBtn === null) {
+            this.setState({ clickedBtn: card })
+        } else {
+            if (this.state.clickedBtn.content === card.content) {
+                console.log("match");
+                this.setState({ clickedBtn: null })
+            }
+            else {
+                console.log("try again");
+                setTimeout(
+                    () => this.setState({ clickedBtn: null }),
+                    3000
+                );
+                this.state.clickedBtn.isClicked = false;
+                card.isClicked = false;
+            }
+
+        }
+        this.clicksCounterHandler()
+        this.movesStateHandler()
+        console.log(this.state.clicksCounter);
     }
 
-    isCardsEqual = () => {
-        let filteredCards = this.state.cards.filter((card) => card.isClicked == true)
-        if (filteredCards[0].content === filteredCards[1]?.content) {
-            console.log("cards match!");
+    clicksCounterHandler = () => {
+        this.setState({ clicksCounter: this.state.clicksCounter + 1 })
+        if (this.state.clicksCounter === 2) {
+            // this.isCardsEqual()
         }
-        console.log(filteredCards);
     }
+
+    movesStateHandler = () => {
+        if (this.state.clicksCounter === 2) {
+            this.setState({ movesCounter: this.state.movesCounter + 1 })
+            this.setState({ clicksCounter: 1 })
+        }
+    }
+
+    // isCardsEqual = () => {
+
+    //     if (this.state.clickedBtn === ) {
+    //         console.log("cards match!");
+    //     }
+    //     // else {
+    //     //     filteredArr[0].isClicked = false
+    //     //     this.setState({ ...this.state });
+    //     // }  
+    // }
 
     render() {
         return (<div className="MemoryGame">
@@ -47,6 +87,7 @@ class MemoryGame extends Component {
                 </p>)}
             <h3>Game timer: {this.state.timer}</h3>
             <h3>Moves Counter: {this.state.movesCounter}</h3>
+
         </div>)
     }
 }
