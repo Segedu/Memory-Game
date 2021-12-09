@@ -46,7 +46,6 @@ class MemoryGame extends Component {
                 this.state.clickedBtn.isClicked = false;
                 card.isClicked = false;
             }
-
         }
         this.clicksCounterHandler()
         this.movesStateHandler()
@@ -55,9 +54,6 @@ class MemoryGame extends Component {
 
     clicksCounterHandler = () => {
         this.setState({ clicksCounter: this.state.clicksCounter + 1 })
-        if (this.state.clicksCounter === 2) {
-            // this.isCardsEqual()
-        }
     }
 
     movesStateHandler = () => {
@@ -66,18 +62,6 @@ class MemoryGame extends Component {
             this.setState({ clicksCounter: 1 })
         }
     }
-
-    // isCardsEqual = () => {
-
-    //     if (this.state.clickedBtn === ) {
-    //         console.log("cards match!");
-    //     }
-    //     // else {
-    //     //     filteredArr[0].isClicked = false
-    //     //     this.setState({ ...this.state });
-    //     // }  
-    // }
-
     render() {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
