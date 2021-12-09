@@ -25,11 +25,27 @@ class MemoryGame extends Component {
         setInterval(() => { this.setState({ timer: this.state.timer + 1 }) }, 1000)
     }
 
-    cardStateHandler = (cardId) => {
+    clicksCounter = () => {
+        this.setState({ clicksCounter: this.state.clicksCounter + 1 })
+    }
+
+    movesIncreaseHandler = () => {
+        if (this.state.clicksCounter === 2) {
+            this.setState({ movesCounter: this.state.movesCounter + 1 })
+            this.setState({ clicksCounter: 1 })
+        }
+    }
+
+    cardClicked = (cardId) => {
         const card = this.state.cards.find((cardToFind) => cardToFind.id === cardId)
         card.isClicked = true;
         this.setState({ ...this.state });
+        this.isCardsEqual(card)
+        this.clicksCounter()
+        this.movesIncreaseHandler()
+    }
 
+    isCardsEqual = (card) => {
         if (this.state.clickedBtn === null) {
             this.setState({ clickedBtn: card })
         } else {
@@ -40,38 +56,30 @@ class MemoryGame extends Component {
             else {
                 console.log("try again");
                 setTimeout(
-                    () => this.setState({ clickedBtn: null }),
-                    3000
+                    () => {
+                        this.state.clickedBtn.isClicked = false;
+                        card.isClicked = false;
+                        this.setState({ clickedBtn: null });
+                    },
+                    1000
                 );
-                this.state.clickedBtn.isClicked = false;
-                card.isClicked = false;
             }
         }
-        this.clicksCounterHandler()
-        this.movesStateHandler()
-        console.log(this.state.clicksCounter);
     }
 
-    clicksCounterHandler = () => {
-        this.setState({ clicksCounter: this.state.clicksCounter + 1 })
+    isGameOver = () => {
+
     }
 
-    movesStateHandler = () => {
-        if (this.state.clicksCounter === 2) {
-            this.setState({ movesCounter: this.state.movesCounter + 1 })
-            this.setState({ clicksCounter: 1 })
-        }
-    }
     render() {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
                 <p key={card.id}
-                    onClick={() => this.cardStateHandler(card.id)}>
+                    onClick={() => this.cardClicked(card.id)}>
                     {card.isClicked == true ? card.content : card.cardBack}
                 </p>)}
             <h3>Game timer: {this.state.timer}</h3>
             <h3>Moves Counter: {this.state.movesCounter}</h3>
-
         </div>)
     }
 }
