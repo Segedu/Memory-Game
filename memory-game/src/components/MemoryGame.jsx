@@ -8,14 +8,17 @@ class MemoryGame extends Component {
         clicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
-        GameOverChecker: 4,
+        GameOverChecker: 6,
         cards: [
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2021/08/31/00/05/background-6587392__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2021/08/31/00/05/background-6587392__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2017/12/17/21/44/coffee-3025022__480.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2017/12/17/21/44/coffee-3025022__480.jpg", isClicked: false, id: uuidv4() }]
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }]
+
     }
 
     componentDidMount() {
@@ -62,7 +65,7 @@ class MemoryGame extends Component {
         if (this.state.clickedCard === null) {
             this.setState({ clickedCard: card })
         } else {
-            if (this.state.clickedCard.content === card.content) {
+            if (this.state.clickedCard.cardFrontContent === card.cardFrontContent) {
                 this.setState({ clickedCard: null })
                 this.isGameOver()
             }
@@ -96,7 +99,7 @@ class MemoryGame extends Component {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
                 <img key={card.id}
-                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.content : card.cardBack}>
+                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.cardFrontContent : card.cardBack}>
                 </img>
             )}
             <h3>Game Timer: {this.state.GameTimer}</h3>
