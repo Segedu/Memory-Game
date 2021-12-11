@@ -4,21 +4,23 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
+        setIntervalTimerId: null,
         clickedCard: null,
         clicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
         GameOverChecker: 6,
-        cards: [
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() },
-            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", cardFrontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }]
-
+        cards:
+            [
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2021/09/17/03/24/forest-6631518__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }
+            ]
     }
 
     componentDidMount() {
@@ -27,7 +29,7 @@ class MemoryGame extends Component {
     }
 
     startGame = () => {
-        let TimerId = setInterval(() => {
+        this.setIntervalTimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
             })
@@ -65,7 +67,7 @@ class MemoryGame extends Component {
         if (this.state.clickedCard === null) {
             this.setState({ clickedCard: card })
         } else {
-            if (this.state.clickedCard.cardFrontContent === card.cardFrontContent) {
+            if (this.state.clickedCard.frontContent === card.frontContent) {
                 this.setState({ clickedCard: null })
                 this.isGameOver()
             }
@@ -85,12 +87,12 @@ class MemoryGame extends Component {
     isGameOver = () => {
         this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
         if (this.state.GameOverChecker === 0) {
-            clearInterval()
+            clearInterval(this.setIntervalTimerId)
             setTimeout(
                 () => {
-                    alert("Game Over - You Won")
+                    alert("Game Over-You Won")
                 },
-                1000
+                500
             );
         }
     }
@@ -99,11 +101,11 @@ class MemoryGame extends Component {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
                 <img key={card.id}
-                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.cardFrontContent : card.cardBack}>
+                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.frontContent : card.cardBack}>
                 </img>
             )}
-            <h3>Game Timer: {this.state.GameTimer}</h3>
-            <h3>Moves Counter: {this.state.movesCounter}</h3>
+            <h2>Game Timer: {this.state.GameTimer}</h2>
+            <h2>Moves Counter: {this.state.movesCounter}</h2>
         </div>)
     }
 }
