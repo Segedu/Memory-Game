@@ -4,8 +4,8 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
-        clickedBtn: null,
-        timer: 0,
+        clickedCard: null,
+        GameTimer: 0,
         clicksCounter: 1,
         movesCounter: 0,
         cards: [
@@ -22,7 +22,7 @@ class MemoryGame extends Component {
     }
 
     startGame = () => {
-        setInterval(() => { this.setState({ timer: this.state.timer + 1 }) }, 1000)
+        setInterval(() => { this.setState({ GameTimer: this.state.GameTimer + 1 }) }, 1000)
     }
 
     clicksCounter = () => {
@@ -46,21 +46,21 @@ class MemoryGame extends Component {
     }
 
     isCardsEqual = (card) => {
-        if (this.state.clickedBtn === null) {
-            this.setState({ clickedBtn: card })
+        if (this.state.clickedCard === null) {
+            this.setState({ clickedCard: card })
         } else {
-            if (this.state.clickedBtn.content === card.content) {
+            if (this.state.clickedCard.content === card.content) {
                 console.log("match");
-                this.setState({ clickedBtn: null })
+                this.setState({ clickedCard: null })
                 // this.isGameOver()
             }
             else {
                 console.log("try again");
                 setTimeout(
                     () => {
-                        this.state.clickedBtn.isClicked = false;
+                        this.state.clickedCard.isClicked = false;
                         card.isClicked = false;
-                        this.setState({ clickedBtn: null });
+                        this.setState({ clickedCard: null });
                     },
                     1000
                 );
@@ -83,7 +83,7 @@ class MemoryGame extends Component {
                     onClick={() => this.cardClicked(card.id)}>
                     {card.isClicked == true ? card.content : card.cardBack}
                 </p>)}
-            <h3>Game timer: {this.state.timer}</h3>
+            <h3>Game Timer: {this.state.GameTimer}</h3>
             <h3>Moves Counter: {this.state.movesCounter}</h3>
         </div>)
     }
