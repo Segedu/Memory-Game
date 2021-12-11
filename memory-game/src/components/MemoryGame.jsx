@@ -24,7 +24,11 @@ class MemoryGame extends Component {
     }
 
     startGame = () => {
-        setInterval(() => { this.setState({ GameTimer: this.state.GameTimer + 1 }) }, 1000)
+        let TimerId = setInterval(() => {
+            this.setState({
+                GameTimer: this.state.GameTimer + 1,
+            })
+        }, 1000)
     }
 
     shuffleCards = () => {
@@ -78,7 +82,9 @@ class MemoryGame extends Component {
     isGameOver = () => {
         this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
         if (this.state.GameOverChecker === 0) {
+            clearInterval()
             alert("Game Over - You Won")
+            alert("start new game?")
         }
     }
 
