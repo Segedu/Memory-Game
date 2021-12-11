@@ -25,7 +25,6 @@ class MemoryGame extends Component {
 
     componentDidMount() {
         this.shuffleCards()
-        this.startGame()
     }
 
     startGame = () => {
@@ -98,6 +97,7 @@ class MemoryGame extends Component {
                     }
                     this.setState({ cards: tempArr })
                     this.setState({ clickedCard: null });
+                    this.setState({ GameTimer: 0 })
                 },
                 500
             );
@@ -108,9 +108,11 @@ class MemoryGame extends Component {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
                 <img key={card.id}
-                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.frontContent : card.cardBack}>
+                    onClick={() => this.mainCardsClicksHandler(card.id)}
+                    src={card.isClicked == true ? card.frontContent : card.cardBack}>
                 </img>
             )}
+            <button onClick={this.startGame}>Start Game</button>
             <h2>Game Timer: {this.state.GameTimer}</h2>
             <h2>Moves Counter: {this.state.movesCounter}</h2>
         </div>)
