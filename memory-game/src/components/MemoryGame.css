@@ -5,12 +5,24 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(4, 22%);
-    gap: 10px;
-    margin-top: 5%;
+    gap: 15px;
+    margin-top: 3%;
 }
+/* section{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin: 2%;
+    padding: 2%;
+} */
 img{
     height: 220px;
     width: 300px;
     border-radius: 10px;
     box-shadow: 4px 4px 4px gray;
+}
+button{  
+    border-radius: 10px;
+    background-color: yellowgreen;
+    font-weight: 700;
 }

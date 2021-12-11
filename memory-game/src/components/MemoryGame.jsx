@@ -24,8 +24,8 @@ class MemoryGame extends Component {
     }
 
     componentDidMount() {
-        this.startGame()
         this.shuffleCards()
+        this.startGame()
     }
 
     startGame = () => {
@@ -91,6 +91,13 @@ class MemoryGame extends Component {
             setTimeout(
                 () => {
                     alert("Game Over-You Won")
+                    let tempArr = []
+                    for (let i = 0; i < this.state.cards.length; i++) {
+                        let newObj = this.state.cards[i].isClicked = false
+                        tempArr.push(newObj)
+                    }
+                    this.setState({ cards: tempArr })
+                    this.setState({ clickedCard: null });
                 },
                 500
             );
