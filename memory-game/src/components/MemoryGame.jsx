@@ -20,10 +20,18 @@ class MemoryGame extends Component {
 
     componentDidMount() {
         this.startGame()
+        this.shuffleCards()
     }
 
     startGame = () => {
         setInterval(() => { this.setState({ GameTimer: this.state.GameTimer + 1 }) }, 1000)
+    }
+
+    shuffleCards = () => {
+        for (let i = this.state.cards.length - 1; i > 0; i--) {
+            const randomIndex = Math.floor(Math.random() * (i + 1));
+            [this.state.cards[i], this.state.cards[randomIndex]] = [this.state.cards[randomIndex], this.state.cards[i]];
+        }
     }
 
     clicksCounter = () => {
