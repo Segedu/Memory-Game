@@ -10,12 +10,12 @@ class MemoryGame extends Component {
         GameTimer: 0,
         GameOverChecker: 4,
         cards: [
-            { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
-            { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
-            { cardBack: "click", content: "card 2", isClicked: false, id: uuidv4() },
-            { cardBack: "click", content: "card 2", isClicked: false, id: uuidv4() },
-            { cardBack: "click", content: "card 3", isClicked: false, id: uuidv4() },
-            { cardBack: "click", content: "card 3", isClicked: false, id: uuidv4() }]
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2021/08/31/00/05/background-6587392__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2021/08/31/00/05/background-6587392__340.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2017/12/17/21/44/coffee-3025022__480.jpg", isClicked: false, id: uuidv4() },
+            { cardBack: "https://cdn.pixabay.com/photo/2021/12/04/15/01/leaves-6845395__340.jpg", content: "https://cdn.pixabay.com/photo/2017/12/17/21/44/coffee-3025022__480.jpg", isClicked: false, id: uuidv4() }]
     }
 
     componentDidMount() {
@@ -83,18 +83,22 @@ class MemoryGame extends Component {
         this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
         if (this.state.GameOverChecker === 0) {
             clearInterval()
-            alert("Game Over - You Won")
-            alert("start new game?")
+            setTimeout(
+                () => {
+                    alert("Game Over - You Won")
+                },
+                1000
+            );
         }
     }
 
     render() {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
-                <p key={card.id}
-                    onClick={() => this.mainCardsClicksHandler(card.id)}>
-                    {card.isClicked == true ? card.content : card.cardBack}
-                </p>)}
+                <img key={card.id}
+                    onClick={() => this.mainCardsClicksHandler(card.id)} src={card.isClicked == true ? card.content : card.cardBack}>
+                </img>
+            )}
             <h3>Game Timer: {this.state.GameTimer}</h3>
             <h3>Moves Counter: {this.state.movesCounter}</h3>
         </div>)

@@ -1,12 +1,16 @@
-.MemoryGame{
-
-    display: grid;
-    grid-template-columns: repeat(2, 20%);
-    justify-content: center;
-    gap: 10px;
+*{
+    background-color: wheat;
 }
-p{
-    background-color: orange;
+.MemoryGame{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 30%);
+    gap: 10px;
+    margin-top: 5%;
+}
+img{
+    height: 220px;
+    width: 400px;
     border-radius: 10px;
-    height: 100px;
+    box-shadow: 4px 4px 4px gray;
 }
