@@ -5,9 +5,10 @@ import './MemoryGame.css';
 class MemoryGame extends Component {
     state = {
         clickedCard: null,
-        GameTimer: 0,
         clicksCounter: 1,
         movesCounter: 0,
+        GameTimer: 0,
+        GameOverChecker: 4,
         cards: [
             { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
             { cardBack: "click", content: "card 1", isClicked: false, id: uuidv4() },
@@ -36,7 +37,7 @@ class MemoryGame extends Component {
         }
     }
 
-    cardClicked = (cardId) => {
+    mainCardsClicksHandler = (cardId) => {
         const card = this.state.cards.find((cardToFind) => cardToFind.id === cardId)
         card.isClicked = true;
         this.setState({ ...this.state });
@@ -50,12 +51,10 @@ class MemoryGame extends Component {
             this.setState({ clickedCard: card })
         } else {
             if (this.state.clickedCard.content === card.content) {
-                console.log("match");
                 this.setState({ clickedCard: null })
-                // this.isGameOver()
+                this.isGameOver()
             }
             else {
-                console.log("try again");
                 setTimeout(
                     () => {
                         this.state.clickedCard.isClicked = false;
@@ -68,19 +67,18 @@ class MemoryGame extends Component {
         }
     }
 
-    // isGameOver = () => {
-    //     let lastCard = this.state.cards.find((cardUnClicked) => cardUnClicked.isClicked == false)
-    //     console.log(lastCard);
-    //     if (lastCard) {
-    //         alert("game over- you won")
-    //     }
-    // }
+    isGameOver = () => {
+        this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
+        if (this.state.GameOverChecker === 0) {
+            alert("Game Over - You Won")
+        }
+    }
 
     render() {
         return (<div className="MemoryGame">
             {this.state.cards.map((card) =>
                 <p key={card.id}
-                    onClick={() => this.cardClicked(card.id)}>
+                    onClick={() => this.mainCardsClicksHandler(card.id)}>
                     {card.isClicked == true ? card.content : card.cardBack}
                 </p>)}
             <h3>Game Timer: {this.state.GameTimer}</h3>
