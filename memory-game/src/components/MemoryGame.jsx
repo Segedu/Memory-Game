@@ -4,8 +4,8 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
-        clickedCard: null,
-        clicksCounter: 1,
+        cardToCompare: null,
+        cardClicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
         numOfPairs: 3,
@@ -24,7 +24,7 @@ class MemoryGame extends Component {
     TimerId = null;
 
     startGame = () => {
-        this.shuffleCards()
+        // this.shuffleCards()
         this.TimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
@@ -39,14 +39,14 @@ class MemoryGame extends Component {
         }
     }
 
-    clicksCounter = () => {
-        this.setState({ clicksCounter: this.state.clicksCounter + 1 })
+    cardClicksCounter = () => {
+        this.setState({ cardClicksCounter: this.state.cardClicksCounter + 1 })
     }
 
     movesIncreaseHandler = () => {
-        if (this.state.clicksCounter === 2) {
+        if (this.state.cardClicksCounter === 2) {
             this.setState({ movesCounter: this.state.movesCounter + 1 })
-            this.setState({ clicksCounter: 1 })
+            this.setState({ cardClicksCounter: 1 })
         }
     }
 
@@ -55,25 +55,25 @@ class MemoryGame extends Component {
         card.isClicked = true;
         this.setState({ ...this.state });
         this.isCardsEqual(card)
-        this.clicksCounter()
+        this.cardClicksCounter()
         this.movesIncreaseHandler()
     }
 
     isCardsEqual = (card) => {
-        if (this.state.clickedCard === null) {
-            this.setState({ clickedCard: card })
+        if (this.state.cardToCompare === null) {
+            this.setState({ cardToCompare: card })
         } else {
-            if (this.state.clickedCard.frontContent === card.frontContent) {
+            if (this.state.cardToCompare.frontContent === card.frontContent) {
                 this.setState({ numOfPairs: this.state.numOfPairs - 1 })
-                this.setState({ clickedCard: null })
+                this.setState({ cardToCompare: null })
                 this.isGameOver()
             }
             else {
                 setTimeout(
                     () => {
-                        this.state.clickedCard.isClicked = false;
+                        this.state.cardToCompare.isClicked = false;
                         card.isClicked = false;
-                        this.setState({ clickedCard: null });
+                        this.setState({ cardToCompare: null });
                     },
                     1000
                 );
@@ -89,10 +89,10 @@ class MemoryGame extends Component {
                     alert("Game Over-You Won")
                     let tempArr = []
                     for (let i = 0; i < this.state.cards.length; i++) {
-                        let newObj = this.state.cards[i].isClicked = false
+                        let newObj = this.state.cards[i].isClicked = false;
                         tempArr.push(newObj)
                     }
-                    this.setState({ clickedCard: null });
+                    this.setState({ cardToCompare: null });
                     this.setState({ GameTimer: 0 })
                     this.setState({ movesCounter: 0 })
                 },
