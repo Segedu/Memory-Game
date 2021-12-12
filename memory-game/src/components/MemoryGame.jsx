@@ -4,7 +4,6 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
-        setIntervalTimerId: null,
         clickedCard: null,
         clicksCounter: 1,
         movesCounter: 0,
@@ -22,6 +21,7 @@ class MemoryGame extends Component {
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }
             ]
     }
+    setIntervalTimerId = null;
 
     startGame = () => {
         this.shuffleCards()
