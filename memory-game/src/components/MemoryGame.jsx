@@ -60,7 +60,7 @@ class MemoryGame extends Component {
     }
 
     isCardsEqual = (card) => {
-        if (this.state.cardToCompare === null) {
+        if (!this.state.cardToCompare) {
             this.setState({ cardToCompare: card })
         } else {
             if (this.state.cardToCompare.frontContent === card.frontContent) {
