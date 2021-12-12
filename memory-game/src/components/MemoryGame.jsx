@@ -21,11 +21,11 @@ class MemoryGame extends Component {
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }
             ]
     }
-    setIntervalTimerId = null;
+    TimerId = null;
 
     startGame = () => {
         this.shuffleCards()
-        this.setIntervalTimerId = setInterval(() => {
+        this.TimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
             })
@@ -83,7 +83,7 @@ class MemoryGame extends Component {
     isGameOver = () => {
         this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
         if (this.state.GameOverChecker === 0) {
-            clearInterval(this.setIntervalTimerId)
+            clearInterval(this.TimerId)
             setTimeout(
                 () => {
                     alert("Game Over-You Won")
