@@ -92,9 +92,9 @@ class MemoryGame extends Component {
                         let newObj = this.state.cards[i].isClicked = false
                         tempArr.push(newObj)
                     }
-                    this.setState({ cards: tempArr })
                     this.setState({ clickedCard: null });
                     this.setState({ GameTimer: 0 })
+                    this.setState({ movesCounter: 0 })
                 },
                 500
             );
