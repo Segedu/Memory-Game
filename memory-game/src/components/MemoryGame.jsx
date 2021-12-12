@@ -24,7 +24,7 @@ class MemoryGame extends Component {
     TimerId = null;
 
     startGame = () => {
-        // this.shuffleCards()
+        this.shuffleCards()
         this.TimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
