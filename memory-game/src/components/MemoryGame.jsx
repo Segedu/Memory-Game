@@ -4,7 +4,6 @@ import './MemoryGame.css';
 
 class MemoryGame extends Component {
     state = {
-        cardToCompare: null,
         cardClicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
@@ -22,6 +21,7 @@ class MemoryGame extends Component {
             ]
     }
     TimerId = null;
+    cardToCompare = null;
 
     startGame = () => {
         this.shuffleCards()
@@ -63,7 +63,7 @@ class MemoryGame extends Component {
         if (!this.state.cardToCompare) {
             this.setState({ cardToCompare: card })
         } else {
-            if (this.state.cardToCompare.frontContent === card.frontContent) {
+            if (this.state.cardToCompare.frontContent === card.frontContent && this.state.cardToCompare.id !== card.id) {
                 this.setState({ numOfPairs: this.state.numOfPairs - 1 })
                 this.setState({ cardToCompare: null })
                 this.isGameOver()
