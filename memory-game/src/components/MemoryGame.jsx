@@ -23,11 +23,8 @@ class MemoryGame extends Component {
             ]
     }
 
-    componentDidMount() {
-        this.shuffleCards()
-    }
-
     startGame = () => {
+        this.shuffleCards()
         this.setIntervalTimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
