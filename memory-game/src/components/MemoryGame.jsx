@@ -8,7 +8,7 @@ class MemoryGame extends Component {
         clicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
-        GameOverChecker: 6,
+        numOfPairs: 3,
         cards:
             [
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
@@ -64,6 +64,7 @@ class MemoryGame extends Component {
             this.setState({ clickedCard: card })
         } else {
             if (this.state.clickedCard.frontContent === card.frontContent) {
+                this.setState({ numOfPairs: this.state.numOfPairs - 1 })
                 this.setState({ clickedCard: null })
                 this.isGameOver()
             }
@@ -81,8 +82,7 @@ class MemoryGame extends Component {
     }
 
     isGameOver = () => {
-        this.setState({ GameOverChecker: this.state.GameOverChecker - 2 })
-        if (this.state.GameOverChecker === 0) {
+        if (this.state.numOfPairs === 0) {
             clearInterval(this.TimerId)
             setTimeout(
                 () => {
