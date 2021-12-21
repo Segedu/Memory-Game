@@ -1,12 +1,13 @@
 *{
     background-color: wheat;
+    /* height: 100vh; */
 }
 .MemoryGame{
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(4, 22%);
     gap: 15px;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 /* section{
     display: flex;
@@ -16,7 +17,7 @@
     padding: 2%;
 } */
 img{
-    height: 220px;
+    height: 160px;
     width: 300px;
     border-radius: 10px;
     box-shadow: 4px 4px 4px gray;

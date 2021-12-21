@@ -7,7 +7,7 @@ class MemoryGame extends Component {
         cardClicksCounter: 1,
         movesCounter: 0,
         GameTimer: 0,
-        numOfPairs: 3,
+        numOfPairs: 5,
         cards:
             [
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
@@ -17,7 +17,12 @@ class MemoryGame extends Component {
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2014/04/05/11/20/green-315216__340.jpg", isClicked: false, id: uuidv4() },
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() },
-                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() }
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2015/04/27/13/40/spring-flowers-741965__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/07/25/06/51/thuja-4361821__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/07/25/06/51/thuja-4361821__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2020/08/17/19/01/clouds-5496227__340.jpg", isClicked: false, id: uuidv4() },
+                { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2020/08/17/19/01/clouds-5496227__340.jpg", isClicked: false, id: uuidv4() },
+
             ]
     }
     TimerId = null;
@@ -103,6 +108,7 @@ class MemoryGame extends Component {
 
     render() {
         return (<div className="MemoryGame">
+
             {this.state.cards.map((card) =>
                 <img key={card.id}
                     onClick={() => this.mainCardsClicksHandler(card.id)}
