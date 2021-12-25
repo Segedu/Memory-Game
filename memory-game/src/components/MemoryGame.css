@@ -5,19 +5,32 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(4, 20%);
-    gap: 20px;
+    gap: 10px;
     margin-top: 1%;
 }
 img{
     height: 160px;
-    width: 280px;
+    width: 270px;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgb(233, 226, 226);
 }
-button{  
+button{
+    border: none;
+}
+.startGameBtn{  
     margin-bottom: 1%;
     border-radius: 5px;
     background-color: rgb(0, 0, 0);
-    font-weight: 700;
+    font-weight: 600;
     color: white;
+}
+.swal2-container {
+    display: flex;
+    background-color: red;
+    justify-content: center;
+    margin: auto;
+        width: 50%;
+}
+#titleText{
+    color: red;
 }

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
 import './MemoryGame.css';
 
 class MemoryGame extends Component {
@@ -27,14 +28,16 @@ class MemoryGame extends Component {
     }
     TimerId = null;
     cardToCompare = null;
+    disabled = true;
 
     startGame = () => {
-        this.shuffleCards()
+        // this.shuffleCards()
         this.TimerId = setInterval(() => {
             this.setState({
                 GameTimer: this.state.GameTimer + 1,
             })
         }, 1000)
+        this.disabled = false;
     }
 
     shuffleCards = () => {
@@ -91,7 +94,10 @@ class MemoryGame extends Component {
             clearInterval(this.TimerId)
             setTimeout(
                 () => {
-                    alert("Game Over-You Won")
+                    Swal.fire(
+                        'Good job!',
+                        'You Won!'
+                    )
                     let tempArr = []
                     for (let i = 0; i < this.state.cards.length; i++) {
                         let newObj = this.state.cards[i].isClicked = false;
@@ -110,12 +116,12 @@ class MemoryGame extends Component {
         return (<div className="MemoryGame">
 
             {this.state.cards.map((card) =>
-                <img key={card.id}
+                <button disabled={this.disabled} key={card.id}
                     onClick={() => this.mainCardsClicksHandler(card.id)}
-                    src={card.isClicked == true ? card.frontContent : card.cardBack}>
-                </img>
+                ><img src={card.isClicked == true ? card.frontContent : card.cardBack} alt="game cards" />
+                </button >
             )}
-            <button onClick={this.startGame}>Start Game</button>
+            <button className="startGameBtn" onClick={this.startGame}>Start Game</button>
             <h2>Game Timer: {this.state.GameTimer}</h2>
             <h2>Moves Counter: {this.state.movesCounter}</h2>
         </div>)
