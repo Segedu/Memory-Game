@@ -112,6 +112,9 @@ class MemoryGame extends Component {
         const gameOverMessage = this.numOfPairs === 0 ? <Message movesCounter={this.state.movesCounter} gameTimer={this.state.gameTimer} /> : "";
         return (
             <Fragment>
+                <button className="startGameBtn" onClick={this.startGame}>Start Game</button>
+                <h2>Game Timer: {this.state.gameTimer}</h2>
+                <h2>Moves Counter: {this.state.movesCounter}</h2>
                 <div className="MemoryGame">
                     {this.state.cards.map((card) =>
                         <button disabled={this.disabled} key={card.id}
@@ -119,10 +122,9 @@ class MemoryGame extends Component {
                         ><img src={card.isClicked == true ? card.frontContent : card.cardBack} alt="game cards" />
                         </button >
                     )}
-                    <button className="startGameBtn" onClick={this.startGame}>Start Game</button>
-                    <h2>Game Timer: {this.state.gameTimer}</h2>
-                    <h2>Moves Counter: {this.state.movesCounter}</h2>
+
                 </div>
+
                 {gameOverMessage}
             </Fragment>
         )
