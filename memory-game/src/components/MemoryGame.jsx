@@ -1,6 +1,7 @@
- import { Component, Fragment } from "react";
+import { Component, Fragment } from "react";
 import { v4 as uuidv4 } from 'uuid';
- import Message from "./Message";
+import Message from "./Message";
+import './MemoryGame.css'
 
 class MemoryGame extends Component {
     state = {
@@ -35,7 +36,7 @@ class MemoryGame extends Component {
                 gameTimer: this.state.gameTimer + 1,
             })
         }, 1000)
-        this.shuffleCards()
+        // this.shuffleCards()
         this.disabled = false;
     }
 
@@ -101,7 +102,7 @@ class MemoryGame extends Component {
                     this.setState({ cardToCompare: null });
                     this.setState({ gameTimer: 0 })
                     this.setState({ movesCounter: 0 })
-                    this.numOfPairs = 6;
+                    // this.numOfPairs = 6;
                 },
                 4000
             );
@@ -109,6 +110,7 @@ class MemoryGame extends Component {
     }
 
     render() {
+        const gameOverMessage = this.numOfPairs === 0 ? <Message movesCounter={this.state.movesCounter} gameTimer={this.state.gameTimer} /> : "";
         return (
             <Fragment>
                 <div className="MemoryGame">
@@ -122,8 +124,7 @@ class MemoryGame extends Component {
                     <h2>Game Timer: {this.state.gameTimer}</h2>
                     <h2>Moves Counter: {this.state.movesCounter}</h2>
                 </div>
-
-                {this.numOfPairs === 0 ? <Message movesCounter={this.state.movesCounter} gameTimer={this.state.gameTimer} /> : "start new game"}
+                {gameOverMessage}
             </Fragment>
         )
     }

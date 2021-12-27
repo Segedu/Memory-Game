@@ -24,3 +24,10 @@ button{
     font-weight: 600;
     color: white;
 }
+.swal2-container {
+    display: flex;
+    background-color: red;
+    justify-content: center;
+    margin: auto;
+        width: 50%;
+}
