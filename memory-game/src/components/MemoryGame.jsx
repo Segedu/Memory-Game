@@ -102,7 +102,6 @@ class MemoryGame extends Component {
                     this.setState({ cardToCompare: null });
                     this.setState({ gameTimer: 0 })
                     this.setState({ movesCounter: 0 })
-                    // this.numOfPairs = 6;
                 },
                 4000
             );
