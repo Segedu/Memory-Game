@@ -9,6 +9,7 @@ class MemoryGame extends Component {
         movesCounter: 0,
         gameTimer: 0,
         gameOver: false,
+        startBtnDisabled: false,
         cards:
             [
                 { cardBack: "https://cdn.pixabay.com/photo/2020/08/26/15/24/focus-5519780__340.jpg", frontContent: "https://cdn.pixabay.com/photo/2019/10/15/13/40/winter-4551699__340.jpg", isClicked: false, id: uuidv4() },
@@ -37,8 +38,9 @@ class MemoryGame extends Component {
                 gameTimer: this.state.gameTimer + 1,
             })
         }, 1000)
-        // this.shuffleCards()
+        this.shuffleCards()
         this.disabled = false;
+        this.state.startBtnDisabled = true;
     }
 
     shuffleCards = () => {
@@ -105,6 +107,7 @@ class MemoryGame extends Component {
                     this.setState({ gameTimer: 0 });
                     this.setState({ movesCounter: 0 });
                     this.setState({ gameOver: false })
+                    this.setState({ startBtnDisabled: false });
                 },
                 4000
             );
@@ -115,7 +118,7 @@ class MemoryGame extends Component {
         const gameOverMessage = this.state.gameOver == true ? <Message movesCounter={this.state.movesCounter} gameTimer={this.state.gameTimer} /> : ""
         return (
             <Fragment>
-                <button className="startGameBtn" onClick={this.startGame}>Start Game</button>
+                <button className="startGameBtn" onClick={this.startGame} disabled={this.state.startBtnDisabled}>Start Game</button>
                 <h2>Game Timer: {this.state.gameTimer}</h2>
                 <h2>Moves Counter: {this.state.movesCounter}</h2>
                 <div className="MemoryGame">
