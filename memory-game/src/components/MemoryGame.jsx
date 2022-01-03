@@ -31,6 +31,8 @@ class MemoryGame extends Component {
     cardToCompare = null;
     disabled = true;
     numOfPairs = 6;
+    playersResults = [];
+    GAME_HISTORY = "Time-Record";
 
     startGame = () => {
         this.TimerId = setInterval(() => {
@@ -38,7 +40,7 @@ class MemoryGame extends Component {
                 gameTimer: this.state.gameTimer + 1,
             })
         }, 1000)
-        this.shuffleCards()
+        // this.shuffleCards()
         this.disabled = false;
         this.state.startBtnDisabled = true;
     }
@@ -91,10 +93,16 @@ class MemoryGame extends Component {
             }
         }
     }
+    getRecords = () => {
+    }
+
+    saveRecords = () => {
+    }
 
     isGameOver = () => {
         if (this.numOfPairs === 0) {
             this.setState({ gameOver: true })
+            this.saveRecords();
             clearInterval(this.TimerId)
             setTimeout(
                 () => {
@@ -103,11 +111,11 @@ class MemoryGame extends Component {
                         let newObj = this.state.cards[i].isClicked = false;
                         tempArr.push(newObj)
                     }
+                    this.setState({ gameOver: false })
+                    this.setState({ startBtnDisabled: false });
                     this.setState({ cardToCompare: null });
                     this.setState({ gameTimer: 0 });
                     this.setState({ movesCounter: 0 });
-                    this.setState({ gameOver: false })
-                    this.setState({ startBtnDisabled: false });
                 },
                 4000
             );
@@ -119,8 +127,12 @@ class MemoryGame extends Component {
         return (
             <Fragment>
                 <button className="startGameBtn" onClick={this.startGame} disabled={this.state.startBtnDisabled}>Start Game</button>
+                <button onClick={() => { this.getRecords }}>
+                    Records History
+                </button>
                 <h2>Game Timer: {this.state.gameTimer}</h2>
                 <h2>Moves Counter: {this.state.movesCounter}</h2>
+
                 <div className="MemoryGame">
                     {this.state.cards.map((card) =>
                         <button disabled={this.disabled} key={card.id}
